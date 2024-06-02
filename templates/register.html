@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div>
+        <img src="/static/img/registracion.jpg" alt="Фото регистрации">
+        <!-- width="400px" height="155px" -->
+        <h1>Зарегистрируйтесь</h1>
+        <form method="post" action="{{ url_for('register') }}">
+            {{ form.csrf_token }}
+            {% for field in form if field.name != 'csrf_token' %}
+            <p>
+                {{ field.label }} <br>
+                {{ field }}
+                {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </p>
+            {% endfor %}
+            <p>
+                <input type="submit" value="Зарегистрироваться">
+            </p>
+        </form>
+    </div>
+</body>
+</html>
